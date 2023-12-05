@@ -1,10 +1,12 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { AuthContext } from '../contexts/AuthContext'
 
 const Checkout = () => {
   const [monthly, setMonthly] = useState(false)
   const [yearly, setYearly] = useState(false)
   const [item, setItem] = useState(null)
+  const {user} = useContext(AuthContext)
 
   const handleClick = async (e) => {
     e.preventDefault()
@@ -19,7 +21,8 @@ const Checkout = () => {
           items: [item]
         }, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
           }
         });
     

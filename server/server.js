@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 
+const authRoutes = require('./routes/authRoutes')
 const stripeRoutes = require('./routes/stripeRoutes')
 
 // express app
@@ -12,6 +13,7 @@ const app = express()
 app.use(express.json())
 
 // routes
+app.use('/api', authRoutes)
 app.use('/api', stripeRoutes)
 
 // connect to db
