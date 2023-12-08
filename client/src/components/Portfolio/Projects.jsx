@@ -16,24 +16,23 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "bootstrap/dist/css/bootstrap.css";
+import { addProject, deleteProject, updateProject } from "./portfolioreducer";
+import { useDispatch, useSelector } from "react-redux";
 const Projects = () => {
-  const [projects, setProjects] = useState([{ title: "", description: " " }]);
+  const { projects } = useSelector((state) => state.portfolioreducer);
+  const dispatch = useDispatch();
 
   const handleAddProject = () => {
-    setProjects([...projects, { title: "", description: " " }]);
+    dispatch(addProject());
   };
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
-    const updatedProj = [...projects];
-    updatedProj[index][name] = value;
-    setProjects(updatedProj);
+    dispatch(updateProject({ index: index, data: { [name]: value } }));
   };
 
-  const handleDeleteProject = () => {
-    const updatedProj = [...projects];
-    updatedProj.pop();
-    setProjects(updatedProj);
+  const handleDeleteProject = (index) => {
+    dispatch(deleteProject(index));
   };
   return (
     <div>
@@ -63,18 +62,23 @@ const Projects = () => {
               </div>
             </Grid>
           </Grid>
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            {index == projects.length - 1 ? (
+              <IconButton color="success" onClick={handleAddProject}>
+                <AddIcon />
+              </IconButton>
+            ) : null}
+            {projects.length > 1 ? (
+              <IconButton
+                color="danger"
+                onClick={(e) => handleDeleteProject(index)}
+              >
+                <DeleteIcon color="error" />
+              </IconButton>
+            ) : null}
+          </Box>
         </Paper>
       ))}
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <IconButton color="primary" onClick={handleAddProject}>
-          <AddIcon />
-        </IconButton>
-        {projects.length > 1 ? (
-          <IconButton color="danger" onClick={handleDeleteProject}>
-            <DeleteIcon />
-          </IconButton>
-        ) : null}
-      </Box>
     </div>
   );
 };
