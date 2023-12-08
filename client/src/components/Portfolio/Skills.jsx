@@ -1,7 +1,12 @@
 import { Autocomplete, Chip, TextField } from "@mui/material";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSkills } from "./portfolioreducer";
 
 const Skills = () => {
+  const { skills } = useSelector((state) => state.portfolioreducer);
+  const dispatch = useDispatch();
+
   return (
     <>
       <Autocomplete
@@ -9,6 +14,10 @@ const Skills = () => {
         id="tags-filled"
         options={top100Films.map((option) => option.title)}
         freeSolo
+        value={skills}
+        onChange={(event, newValue) => {
+          dispatch(setSkills([...newValue]));
+        }}
         renderTags={(value, getTagProps) =>
           value.map((option, index) => (
             <Chip

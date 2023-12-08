@@ -16,33 +16,28 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "bootstrap/dist/css/bootstrap.css";
+import { useDispatch, useSelector } from "react-redux";
+import { updateWorkExp, addWorkExp, deleteWorkExp } from "./portfolioreducer";
 const WorkExp = () => {
-  const [workExperiences, setWorkExperiences] = useState([
-    { company: "", position: "", years: "" },
-  ]);
+  const { workExp } = useSelector((state) => state.portfolioreducer);
+  const dispatch = useDispatch();
 
   const handleAddExperience = () => {
-    setWorkExperiences([
-      ...workExperiences,
-      { company: "", position: "", years: "" },
-    ]);
+    dispatch(addWorkExp());
   };
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
-    const updatedExperiences = [...workExperiences];
-    updatedExperiences[index][name] = value;
-    setWorkExperiences(updatedExperiences);
+    dispatch(updateWorkExp({ index: index, data: { [name]: value } }));
   };
 
-  const handleDeleteExperience = () => {
-    const updatedExperiences = [...workExperiences];
-    updatedExperiences.pop();
-    setWorkExperiences(updatedExperiences);
+  const handleDeleteExperience = (index) => {
+    dispatch(deleteWorkExp(index));
   };
+
   return (
     <div>
-      {workExperiences.map((experience, index) => (
+      {workExp.map((experience, index) => (
         <Paper key={index} style={{ padding: "10px", margin: "10px" }}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
@@ -107,6 +102,9 @@ const WorkExp = () => {
             <Grid item xs={12}>
               <div class="form-floating">
                 <textarea
+                  name="description"
+                  value={experience.description}
+                  onChange={(e) => handleInputChange(index, e)}
                   class="form-control"
                   placeholder="Leave a comment here"
                   id="floatingTextarea"
@@ -115,18 +113,23 @@ const WorkExp = () => {
               </div>
             </Grid>
           </Grid>
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            {index == workExp.length - 1 ? (
+              <IconButton color="success" onClick={handleAddExperience}>
+                <AddIcon />
+              </IconButton>
+            ) : null}
+            {workExp.length > 1 ? (
+              <IconButton
+                color="danger"
+                onClick={(e) => handleDeleteExperience(index)}
+              >
+                <DeleteIcon color="error" />
+              </IconButton>
+            ) : null}
+          </Box>
         </Paper>
       ))}
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        <IconButton color="primary" onClick={handleAddExperience}>
-          <AddIcon />
-        </IconButton>
-        {workExperiences.length > 1 ? (
-          <IconButton color="danger" onClick={handleDeleteExperience}>
-            <DeleteIcon />
-          </IconButton>
-        ) : null}
-      </Box>
     </div>
   );
 };

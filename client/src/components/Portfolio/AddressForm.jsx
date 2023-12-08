@@ -4,8 +4,11 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-
-export default function AddressForm({ data }) {
+import { useDispatch, useSelector } from "react-redux";
+import { updateData } from "./portfolioreducer";
+export default function AddressForm() {
+  const { data } = useSelector((state) => state.portfolioreducer);
+  const dispatch = useDispatch();
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -16,6 +19,9 @@ export default function AddressForm({ data }) {
           <TextField
             required
             value={data.firstName}
+            onChange={(e) =>
+              dispatch(updateData({ firstName: e.target.value }))
+            }
             id="firstName"
             name="firstName"
             label="First name"
@@ -27,6 +33,7 @@ export default function AddressForm({ data }) {
         <Grid item xs={12} sm={6}>
           <TextField
             value={data.lastName}
+            onChange={(e) => dispatch(updateData({ lastName: e.target.value }))}
             required
             id="lastName"
             name="lastName"
@@ -62,6 +69,7 @@ export default function AddressForm({ data }) {
         <Grid item xs={12} sm={6}>
           <TextField
             value={data.city}
+            onChange={(e) => dispatch(updateData({ city: e.target.value }))}
             required
             id="city"
             name="city"
@@ -74,6 +82,7 @@ export default function AddressForm({ data }) {
         <Grid item xs={12} sm={6}>
           <TextField
             value={data.state}
+            onChange={(e) => dispatch(updateData({ state: e.target.value }))}
             id="state"
             name="state"
             label="State/Province/Region"
@@ -84,6 +93,7 @@ export default function AddressForm({ data }) {
         <Grid item xs={12} sm={6}>
           <TextField
             value={data.zip}
+            onChange={(e) => dispatch(updateData({ zip: e.target.value }))}
             required
             id="zip"
             name="zip"
