@@ -3,7 +3,7 @@ function Nav() {
     <div>
       <nav class="profile-nav navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">
-          Navbar
+          Portfolio Designer
         </a>
         <button
           class="navbar-toggler"
@@ -26,7 +26,7 @@ function Nav() {
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
-                Link
+                Edit Details
               </a>
             </li>
             <li class="nav-item dropdown">
@@ -39,7 +39,7 @@ function Nav() {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Dropdown
+                My Portfolios
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">
@@ -54,20 +54,40 @@ function Nav() {
                 </a>
               </div>
             </li>
-            <li class="nav-item">
+            {/* <li class="nav-item">
               <a class="nav-link disabled" href="#">
                 Disabled
               </a>
-            </li>
+            </li> */}
           </ul>
-          <form class="form-inline my-2 my-lg-0 float-end">
+          <form
+            class="form-inline my-2 my-lg-0 float-end"
+            style={{
+              display: "inline-flex",
+              float: "right",
+              position: "relative",
+            }}
+          >
             <input
               class="form-control mr-sm-2 float-end"
               type="search"
               placeholder="Search"
               aria-label="Search"
+              style={{
+                display: "inline-flex",
+                float: "right",
+                position: "relative",
+              }}
             />
-            <button class="btn btn-outline-success my-2 my-sm-0 float-end" type="submit">
+            <button
+              class="btn btn-outline-light my-2 my-sm-0 float-end"
+              type="submit"
+              style={{
+                display: "inline-flex",
+                float: "right",
+                position: "relative",
+              }}
+            >
               Search
             </button>
           </form>
