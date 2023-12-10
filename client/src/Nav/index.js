@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 function Nav() {
   return (
     <div>
@@ -54,43 +56,20 @@ function Nav() {
                 </a>
               </div>
             </li>
+            <li class="nav-item active float-right">
+              <a class="nav-link" href="#">
+                <FontAwesomeIcon
+                  icon="user"
+                  style={{ float: "right", color: "white" }}
+                ></FontAwesomeIcon>
+              </a>
+            </li>
             {/* <li class="nav-item">
               <a class="nav-link disabled" href="#">
                 Disabled
               </a>
             </li> */}
           </ul>
-          <form
-            class="form-inline my-2 my-lg-0 float-end"
-            style={{
-              display: "inline-flex",
-              float: "right",
-              position: "relative",
-            }}
-          >
-            <input
-              class="form-control mr-sm-2 float-end"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              style={{
-                display: "inline-flex",
-                float: "right",
-                position: "relative",
-              }}
-            />
-            <button
-              class="btn btn-outline-light my-2 my-sm-0 float-end"
-              type="submit"
-              style={{
-                display: "inline-flex",
-                float: "right",
-                position: "relative",
-              }}
-            >
-              Search
-            </button>
-          </form>
         </div>
       </nav>
     </div>
